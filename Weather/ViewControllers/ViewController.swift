@@ -3,13 +3,13 @@
 //  Weather
 //
 //  Created by Vladimir Stepanchikov on 26.09.2020.
-// https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=YOUR_API_KEY
-// api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a01da6993f7a2ff11f0de7f6c3171871
+//
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, CLLocationManagerDelegate {
+    
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var pressureLabel: UILabel!
@@ -17,30 +17,43 @@ class ViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var appearentTemperatureLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBAction func refreshButtonTapped(_ sender: UIButton) {
+        toggleActivityIndicator(on: true)
+        getCurrentWeatherData()
     }
+    let locationManager = CLLocationManager()
+    
+    lazy var weatherManager = APIWeatherManager(apiKey: "2a6d8e376a69c1ae07d4a52dd0c2dfdc")
+    let coordinates = Coordinates(latitude: 37.7873589, longitude: -122.408227)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
         
-        let icon = WeatherIconManager.Rain.image
+        getCurrentWeatherData()
         
-        let currentWeather = CurrentWeather(temperature: 10.0, appearentTemperature: 5.0, humidity: 30, pressure: 750, icon: icon)
-        
-        updateUIWith(currentWeather: currentWeather)
-        
-//        let urlString = "https://api.forecast.io/forecast/2a6d8e376a69c1ae07d4a52dd0c2dfdc/37.8267,-122.423"
-//        let baseURL = URL(string: "https://api.forecast.io/forecast/2a6d8e376a69c1ae07d4a52dd0c2dfdc/")
-//        let fullURL = URL(string: "37.8267,-122.423", relativeTo: baseURL)
-//        
-//        let sessionconfiguration = URLSessionConfiguration.default
-//        let session = URLSession(configuration: sessionconfiguration)
-//        
-//        let request = URLRequest(url: fullURL!)
-//        let dataTask = session.dataTask(with: fullURL!) { (data, response, error) in
-//        }
-//        dataTask.resume()
+    }
+    
+    func getCurrentWeatherData() {
+        weatherManager.fetchCurrentWeatherWith(coordinates: coordinates) { [self] (result) in
+            
+            self.toggleActivityIndicator(on: false)
+            
+            switch result {
+            case .Success(let currentWeather):
+                self.updateUIWith(currentWeather: currentWeather)
+            case .Failure(let error as NSError):
+                let alertController = UIAlertController(title: "Unable to get data", message: "\(error)", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     func updateUIWith(currentWeather: CurrentWeather) {
@@ -52,6 +65,18 @@ class ViewController: UIViewController {
         self.humidityLabel.text = currentWeather.humidityString
         
     }
-
+    func toggleActivityIndicator(on: Bool) {
+        refreshButton.isHidden = on
+        if on {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations.last! as CLLocation
+        print("My location latitude: \(userLocation.coordinate.latitude), longitude: \(userLocation.coordinate.longitude)")
+    }
 }
 

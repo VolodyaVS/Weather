@@ -18,6 +18,9 @@
 		FF857659251F5398000C9741 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF857658251F5398000C9741 /* APIManager.swift */; };
 		FF85765C251F6CC3000C9741 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF85765B251F6CC3000C9741 /* ErrorManager.swift */; };
 		FF85765F251F7DB8000C9741 /* APIWeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF85765E251F7DB8000C9741 /* APIWeatherManager.swift */; };
+		FF857672251FA0AF000C9741 /* ParticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF857671251FA0AF000C9741 /* ParticlesView.swift */; };
+		FF85767A251FA37C000C9741 /* ParticleScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FF857679251FA37C000C9741 /* ParticleScene.sks */; };
+		FF85767F251FA4E2000C9741 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = FF85767E251FA4E2000C9741 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		FF857658251F5398000C9741 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		FF85765B251F6CC3000C9741 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		FF85765E251F7DB8000C9741 /* APIWeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWeatherManager.swift; sourceTree = "<group>"; };
+		FF857671251FA0AF000C9741 /* ParticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlesView.swift; sourceTree = "<group>"; };
+		FF857679251FA37C000C9741 /* ParticleScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ParticleScene.sks; path = "../../../../Downloads/WeatherApp 2/WeatherApp/ParticleScene.sks"; sourceTree = "<group>"; };
+		FF85767E251FA4E2000C9741 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				FF85764F251F31F8000C9741 /* CurrentWeather.swift */,
+				FF857671251FA0AF000C9741 /* ParticlesView.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				FF857642251F1F7B000C9741 /* Assets.xcassets */,
+				FF857679251FA37C000C9741 /* ParticleScene.sks */,
+				FF85767E251FA4E2000C9741 /* spark.png */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -187,9 +196,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF85767F251FA4E2000C9741 /* spark.png in Resources */,
 				FF857646251F1F7B000C9741 /* LaunchScreen.storyboard in Resources */,
 				FF857643251F1F7B000C9741 /* Assets.xcassets in Resources */,
 				FF857641251F1F7B000C9741 /* Main.storyboard in Resources */,
+				FF85767A251FA37C000C9741 /* ParticleScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +213,7 @@
 			files = (
 				FF857659251F5398000C9741 /* APIManager.swift in Sources */,
 				FF85763E251F1F7B000C9741 /* ViewController.swift in Sources */,
+				FF857672251FA0AF000C9741 /* ParticlesView.swift in Sources */,
 				FF85765C251F6CC3000C9741 /* ErrorManager.swift in Sources */,
 				FF85763A251F1F7B000C9741 /* AppDelegate.swift in Sources */,
 				FF857653251F3983000C9741 /* WeatherIconManager.swift in Sources */,
